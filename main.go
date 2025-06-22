@@ -3,7 +3,7 @@ package main
 import (
 	"sync"
 
-	"github.com/Pratham16112202/LLD_go/adapter"
+	"github.com/Pratham16112202/LLD_go/bridge"
 	"github.com/Pratham16112202/LLD_go/singleton"
 )
 
@@ -50,19 +50,27 @@ func TestingSingleton() {
 
 }
 
-func TestingAdapterPattern() {
-	client := &adapter.Client{}
-	mac := &adapter.Mac{}
-	window := &adapter.Windows{}
-	client.InsertIntoLightiningPortIntoComputer(mac)
-	// to connect windows client we need an Usb to Lighting adapter
-	windowAdapter := &adapter.WindowsAdapter{
-		window,
-	}
-	client.InsertIntoLightiningPortIntoComputer(windowAdapter)
+// func TestingAdapterPattern() {
+// 	client := &adapter.Client{}
+// 	mac := &adapter.Mac{}
+// 	window := &adapter.Windows{}
+// 	client.InsertIntoLightiningPortIntoComputer(mac)
+// 	// to connect windows client we need an Usb to Lighting adapter
+// 	windowAdapter := &adapter.WindowsAdapter{
+// 		window,
+// 	}
+// 	client.InsertIntoLightiningPortIntoComputer(windowAdapter)
+// }
 
+func TestingBridgePattern() {
+	FourVideo_loader := bridge.FourKQuality{}
+	mb := bridge.NewMobilePlayer(&FourVideo_loader)
+	mb.Play("Some Movie")
+	HDVideo_loader := bridge.HDQuality{}
+	wb := bridge.NewWebPlayer(&HDVideo_loader)
+	wb.Play("MineCraft")
 }
 
 func main() {
-	TestingAdapterPattern()
+	TestingBridgePattern()
 }
